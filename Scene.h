@@ -12,4 +12,5 @@ public:
 	virtual ~Scene() { delete event; }
 	virtual void draw() = 0;
 	virtual void events() = 0;
+	sf::RenderWindow* GetWindow() { return this->window;  }
 };

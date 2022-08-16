@@ -10,7 +10,7 @@ GameScene::GameScene(sf::RenderWindow* window) {
     SceneManager::clean();
     this->window = window;
 
-    wins = 2;
+    wins = 0;
     
     VIEW_HEIGHT = 400.0f;
     view = new sf::View(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
@@ -18,48 +18,38 @@ GameScene::GameScene(sf::RenderWindow* window) {
 }
 
 void GameScene::draw() {
-    deltaTime = clock.restart().asSeconds();
 
     events();
-
-    for (Player& player : players) {
-        player.Update(deltaTime);
-    }
-
-
-    Vector2f direction;
-
-    for (Platform& platform : platforms) {
-        for (Player& player : players)
-            if (platform.GetCollider().CheckCollider(player.GetCollider(), direction, 1.0f))
-            {
-                player.OnCollision(direction);
-            }
-    }
-
-
-    view->setCenter(players.at(0).GetPosition());
-
-    window->clear(Color(100, 100, 100));
+    
+    /* Set window and view */
+    window->clear();
     window->draw(background);
 
+    view->setCenter(players.at(0).GetPosition());
     window->setView(*view);//seguir camara de jugador
 
+    deltaTime = clock.restart().asSeconds();
     // jugadores
     for (Player& player : players) {
         player.Draw(*window);
+        player.Update(deltaTime);
     }
 
     // plataformas
-    for (Platform& platform : platforms)
+    for (Platform& platform : platforms) {
         platform.Draw(*window);
-    
+    }
 
+    // spikes
+    for (Spike& spike : spikes) {
+        spike.Draw(*window);
+    }
+    
+    CheckCollisions(platforms);
+    CheckCollisions(spikes);
     changeLevel();
 }
     
-
-
 void GameScene::events() {
     while (window->pollEvent(*event))
     {
@@ -90,6 +80,7 @@ void GameScene::ResizeView()
 void GameScene::setLevel(Level* level) 
 {
     platforms = level->GetPlatforms();
+    spikes = level->GetSpikes();
 }
 
 void GameScene::changeLevel() {
@@ -127,5 +118,16 @@ void GameScene::changeLevel() {
             setLevel(level);
         }
 
+    }
+}
+
+
+template<typename structure>
+void GameScene::CheckCollisions(std::vector<structure> collection) {
+    sf::Vector2f direction;
+   
+    for (structure& element : collection) {
+        for (Player& player : players)
+            element.OnCollision(player,direction,1.0f);
     }
 }

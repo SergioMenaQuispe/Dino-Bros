@@ -3,6 +3,7 @@
 #include"Scene.h"
 #include"Player.h"
 #include"Platform.h"
+#include"Spike.h"
 #include"Level.h"
 #include<vector>
 
@@ -11,6 +12,7 @@ class GameScene : public Scene
 private:
 	vector<Player> players;
 	vector<Platform> platforms;
+	vector<Spike> spikes;
 
 	sf::View* view;
 	float deltaTime;
@@ -31,6 +33,9 @@ public:
 	void setLevel(Level* level);
 
 	void changeLevel();
+
+	template<typename structure>
+	void CheckCollisions(std::vector<structure> collection);
 
 };
 

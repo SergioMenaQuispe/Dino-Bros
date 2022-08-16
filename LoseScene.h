@@ -1,7 +1,7 @@
 #pragma once
 #include"Scene.h"
 #include<SFML/Graphics.hpp>
-class LoseScene : Scene
+class LoseScene : public Scene
 {
 public: 
 	LoseScene(sf::RenderWindow* window);

@@ -17,6 +17,8 @@ public:
 
 	static Scene* createGameScene(sf::RenderWindow* window, int cant_players);
 	static Scene* createMenuScene(sf::RenderWindow* window);
+	static Scene* createLoseScene(sf::RenderWindow* window);
+	static Scene* createWinScene(sf::RenderWindow* window);
 
 	static void clean();
 

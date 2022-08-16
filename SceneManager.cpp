@@ -1,6 +1,8 @@
 #include "SceneManager.h"
 #include"GameScene.h"
 #include"MenuScene.h"
+#include"LoseScene.h"
+#include"WinScene.h"
 
 SceneManager* SceneManager::instance = NULL;
 std::stack<Scene*> SceneManager::scenes = {};
@@ -37,7 +39,10 @@ Scene* SceneManager::createGameScene(sf::RenderWindow* window, int cant_players)
 
 	return scene;
 }
+
 Scene* SceneManager::createMenuScene(sf::RenderWindow* window) { return new MenuScene(window); }
+Scene* SceneManager::createLoseScene(sf::RenderWindow* window) { return new LoseScene(window); }
+Scene* SceneManager::createWinScene(sf::RenderWindow* window) { return new WinScene(window); }
 
 
 void SceneManager::push(Scene* newScene) {
