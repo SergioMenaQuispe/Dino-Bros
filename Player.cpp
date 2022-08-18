@@ -1,7 +1,8 @@
 #include "Player.h"
+#include"SceneManager.h"
 using namespace sf;
 
-Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string controls, float switchTime, Vector2f position)
+Player::Player(std::string nameTexture,std::string controls, GameScene * game)
 {
 		this->controls = controls;
 		this->speed = 200.0f;
@@ -15,12 +16,15 @@ Player::Player(std::string nameTexture, sf::Vector2u imageCount, std::string con
 
 		body.setSize(Vector2f(50.0f, 50.0f));
 		body.setOrigin(body.getSize() / 2.0f);
-		body.setPosition(position);
+		body.setPosition({ 206.0f, 206.0f });
 		body.setPosition(50.0f, 500.0f);
 		body.setTexture(texture);
 
-		animation = new Animation(texture, imageCount, switchTime);
+		animation = new Animation(texture, Vector2u(3, 2), 0.3f);
 
+		health = 3;
+
+		this->game = game;
 }
 
 Player::~Player()
@@ -117,4 +121,24 @@ void Player::OnCollision(Vector2f direction)
 
 void Player::SetPosition(sf::Vector2f position) {
 	body.setPosition(position);
+}
+
+
+void Player::die() {
+	if (health > 0) {
+		--health;
+	}
+	else {
+		SceneManager::pop();
+	}
+	
+}
+
+
+void Player::setGame(GameScene* game) {
+	this->game = game;
+}
+
+GameScene* getGame() {
+	return this->game;
 }

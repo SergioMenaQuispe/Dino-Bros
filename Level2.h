@@ -2,15 +2,19 @@
 #include"Level.h"
 #include"Platform.h"
 
+
+/* El estado 2*/
 class Level2 : public Level
 {
 public:
-	Level2(std::vector<Player>& players) : Level(players) {
-		for (Player& p : players) {
-			p.SetPosition({100.0f, 0.0f});
-		}
-
+	Level2() {
 		label = "level 2";
+	}
+
+	void setPlayersPosition(std::vector<Player>& players) {
+		for (Player& p : players) {
+			p.SetPosition({ 100.0f, 0.0f });
+		}
 	}
 
 	std::vector<Platform> GetPlatforms() {

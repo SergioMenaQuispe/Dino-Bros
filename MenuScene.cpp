@@ -18,6 +18,8 @@ MenuScene::MenuScene(sf::RenderWindow* window) {
     pointer_position = { 120,110 };
     pointer.setPosition(pointer_position);
 
+    label = "Menu Scene";
+
     /*
     * Opc:
     * 0 -> 1 player
@@ -70,11 +72,11 @@ void MenuScene::events() {
                 switch (opc)
                 {
                 case 0: 
-                    SceneManager::push(SceneManager::createGameScene(window,1));
+                    SceneManager::push(SceneManager::createGameScene(window,1,NULL));
                     break;
 
                 case 1: 
-                    SceneManager::push(SceneManager::createGameScene(window, 2));
+                    SceneManager::push(SceneManager::createGameScene(window, 2, NULL));
                     break;
 
                 case 2: break;

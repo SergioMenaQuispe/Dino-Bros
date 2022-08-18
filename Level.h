@@ -4,17 +4,22 @@
 #include"Spike.h"
 #include<vector>
 
+/* el estado abstracto (patron state)*/
 class Level
 {
 public:
-	Level(std::vector<Player>& players) : players(players) {}
+	Level(){}
 	virtual ~Level() = default;
+	virtual void setPlayersPosition(std::vector<Player>& players) = 0;
+	void setObjects(std::vector<Platform>& platforms, std::vector<Spike>& spikes) {
+		platforms = GetPlatforms();
+		spikes = GetSpikes();
+	}
 	virtual std::vector<Platform> GetPlatforms() = 0;
 	virtual std::vector<Spike> GetSpikes() = 0;
 	std::string GetLabel() { return this->label; }
 protected:
 	std::vector<Platform> platforms;
 	std::vector<Spike> spikes;
-	std::vector<Player> players;
 	std::string label;
 };

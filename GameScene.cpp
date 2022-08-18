@@ -9,7 +9,7 @@ GameScene::GameScene(sf::RenderWindow* window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
-
+    label = "Game Scene";
     wins = 0;
     
     VIEW_HEIGHT = 400.0f;
@@ -47,6 +47,7 @@ void GameScene::draw() {
     
     CheckCollisions(platforms);
     CheckCollisions(spikes);
+
     changeLevel();
 }
     
@@ -77,10 +78,15 @@ void GameScene::ResizeView()
     view->setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 }
 
+/* gamescen es el objeto contexto */
 void GameScene::setLevel(Level* level) 
 {
-    platforms = level->GetPlatforms();
-    spikes = level->GetSpikes();
+    this->level = level;
+}
+
+void GameScene::makeLevel() {
+    level->setPlayersPosition(this->players);
+    level->setObjects(this->platforms, this->spikes);
 }
 
 void GameScene::changeLevel() {
@@ -91,8 +97,9 @@ void GameScene::changeLevel() {
     case 0:
         // nivel 1
         if (!level) {
-            level = new Level1(players);
+            level = new Level1;
             setLevel(level);
+            makeLevel();
         }
 
         break;
@@ -103,8 +110,9 @@ void GameScene::changeLevel() {
         }
 
         if (!level) {
-            level = new Level2(players);
+            level = new Level2;
             setLevel(level);
+            makeLevel();
         }
         break;
     case 2: break;
@@ -114,8 +122,9 @@ void GameScene::changeLevel() {
         }
 
         if (!level) {
-            level = new Level3(players);
+            level = new Level3;
             setLevel(level);
+            makeLevel();
         }
 
     }
@@ -130,4 +139,16 @@ void GameScene::CheckCollisions(std::vector<structure> collection) {
         for (Player& player : players)
             element.OnCollision(player,direction,1.0f);
     }
+}
+
+vector<Player> GameScene::getPlayers() {
+    return this->players;
+}
+
+int GameScene::getLevel() {
+    if (level->GetLabel() == "label 1") return 1;
+    else if (level->GetLabel() == "label 2") return 2;
+    else if (level->GetLabel() == "label 3") return 3;
+
+    return 0;
 }

@@ -26,22 +26,26 @@ SceneManager* SceneManager::getInstance() {
 }
 
 /* Creador de escenas */
-Scene* SceneManager::createGameScene(sf::RenderWindow* window, int cant_players) { 
+Scene* SceneManager::createGameScene(sf::RenderWindow* window, int cant_players, Level * level) { 
 	GameScene * scene = new GameScene(window);
 	Player* player;
-	player = new Player("Images/DinitrioSprite.png", Vector2u(3, 2), "arrows", 0.3f, { 206.0f, 206.0f });
+	player = new Player("Images/DinitrioSprite.png","arrows",scene);
 	scene->addPlayers(*player);
 	
 	if (cant_players == 2) {
-		player = new Player("Images/DinoncioSprite.png", Vector2u(3, 2), "letters", 0.3f, { 206.0f, 206.0f });
+		player = new Player("Images/DinoncioSprite.png","letters",scene);
 		scene->addPlayers(*player);
+	}
+
+	if (level) {
+		scene->setLevel(level);
 	}
 
 	return scene;
 }
 
 Scene* SceneManager::createMenuScene(sf::RenderWindow* window) { return new MenuScene(window); }
-Scene* SceneManager::createLoseScene(sf::RenderWindow* window) { return new LoseScene(window); }
+Scene* SceneManager::createLoseScene(sf::RenderWindow* window, GameScene* game) { return new LoseScene(window,game); }
 Scene* SceneManager::createWinScene(sf::RenderWindow* window) { return new WinScene(window); }
 
 
@@ -64,5 +68,12 @@ void SceneManager::clean() {
 		Scene* deleted = trash.top();
 		trash.pop();
 		delete deleted;
+	}
+}
+
+void SceneManager::goToFirst() {
+	while (scenes.size() > 1)
+	{
+		scenes.pop();
 	}
 }

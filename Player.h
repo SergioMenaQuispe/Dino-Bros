@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 #include "Collider.h"
+#include"GameScene.h"
 
 using namespace std;
 using namespace sf;
@@ -9,7 +10,7 @@ using namespace sf;
 class Player
 {
 public:
-	Player(std::string nameTexture, sf::Vector2u imageCount, string controls, float switchTime, Vector2f position);
+	Player(std::string nameTexture,string controls, GameScene * game);
 	~Player();
 
 	void Update(float deltaTime);
@@ -17,12 +18,18 @@ public:
 	void OnCollision(Vector2f direction);
 	
 	Vector2f GetPosition() { 
-		return body.getPosition();  }
+		return body.getPosition();  
+	}
 	Collider GetCollider() { 
 		return Collider(body);
 	}
 
 	void SetPosition(sf::Vector2f position);
+
+	void setGame(GameScene* game);
+	GameScene* getGame();
+
+	void die();
 private:
 	Texture* texture;
 	RectangleShape body;
@@ -41,4 +48,9 @@ private:
 	bool canJump;
 	float jumpHeight;
 
+	//vidas
+	int health;
+	
+	// game
+	GameScene* game;
 };
