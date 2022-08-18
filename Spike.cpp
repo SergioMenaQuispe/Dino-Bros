@@ -1,5 +1,6 @@
 #include "Spike.h"
 #include"SceneManager.h"
+#include<iostream>
 
 Spike::Spike(std::string nameTexture, Vector2f size, Vector2f position)
 {
@@ -10,6 +11,7 @@ Spike::Spike(std::string nameTexture, Vector2f size, Vector2f position)
 	body.setOrigin(size / 2.0f);
 	body.setTexture(texture);
 	body.setPosition(position);
+
 }
 
 Spike::~Spike()
@@ -18,9 +20,16 @@ Spike::~Spike()
 }
 
 void Spike::OnCollision(Player& player, Vector2f direction, float push) {
-	if (GetCollider().CheckCollider(player.GetCollider(), direction, 6.0f))
+
+	if (GetCollider().CheckCollider(player.GetCollider(), direction, 50.0f))
 	{
-		player.OnCollision(direction);
-		player.die();
+		if (player.alive()) {
+			player.die();
+		}
+
+		/*
+		else {
+			SceneManager::push(SceneManager::createLoseScene(SceneManager::top()->GetWindow()));
+		}*/
 	}
 }

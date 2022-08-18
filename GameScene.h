@@ -27,7 +27,7 @@ public:
 	void draw();
 	void events();
 
-	void addPlayers(Player &p);
+	void addPlayers(Player& p);
 	void ResizeView();
 
 	void setLevel(Level* level);

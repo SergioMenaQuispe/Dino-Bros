@@ -4,8 +4,8 @@
 #include<SFML/Graphics.hpp>
 class LoseScene : public Scene
 {
-public: 
-	LoseScene(sf::RenderWindow* window, GameScene * game);
+public:
+	LoseScene(sf::RenderWindow* window);
 	void draw();
 	void events();
 private:

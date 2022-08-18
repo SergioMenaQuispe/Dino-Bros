@@ -5,7 +5,6 @@ WinScene::WinScene(sf::RenderWindow* window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
-    label = "Win Scene";
 }
 
 

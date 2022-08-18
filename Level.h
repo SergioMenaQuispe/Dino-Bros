@@ -8,7 +8,7 @@
 class Level
 {
 public:
-	Level(){}
+	Level() {}
 	virtual ~Level() = default;
 	virtual void setPlayersPosition(std::vector<Player>& players) = 0;
 	void setObjects(std::vector<Platform>& platforms, std::vector<Spike>& spikes) {
