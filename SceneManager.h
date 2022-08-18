@@ -1,6 +1,5 @@
 #pragma once
 #include"Scene.h"
-#include"LoseScene.h"
 #include<stack>
 
 // funciona como singleton y como abstract factory

@@ -1,18 +1,10 @@
 #include "LoseScene.h"
-#include "LoseScene.h"
 #include"SceneManager.h"
-#include"GameScene.h"
-#include"Level.h"
-#include"Level1.h"
-#include"Level2.h"
-#include"Level3.h"
 
-
-LoseScene::LoseScene(sf::RenderWindow* window) {
+LoseScene::LoseScene(sf::RenderWindow * window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
-    label = "Lose Scene";
 }
 
 

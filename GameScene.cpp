@@ -1,17 +1,17 @@
-ï»¿#include "GameScene.h"
+#include "GameScene.h"
 #include "SceneManager.h"
 #include"Level1.h"
 #include"Level2.h"
 #include"Level3.h"
 
-/* Sera el contexto de los niveles, (patron de diseï¿½o strategy)*/
+/* Sera el contexto de los niveles, (patron de diseño strategy)*/
 GameScene::GameScene(sf::RenderWindow* window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
-    label = "Game Scene";
-    wins = 0;
 
+    wins = 0;
+    
     VIEW_HEIGHT = 400.0f;
     view = new sf::View(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
@@ -20,7 +20,7 @@ GameScene::GameScene(sf::RenderWindow* window) {
 void GameScene::draw() {
 
     events();
-
+    
     /* Set window and view */
     window->clear();
     window->draw(background);
@@ -44,13 +44,12 @@ void GameScene::draw() {
     for (Spike& spike : spikes) {
         spike.Draw(*window);
     }
-
+    
     CheckCollisions(platforms);
     CheckCollisions(spikes);
-
     changeLevel();
 }
-
+    
 void GameScene::events() {
     while (window->pollEvent(*event))
     {
@@ -78,15 +77,9 @@ void GameScene::ResizeView()
     view->setSize(VIEW_HEIGHT * aspectRatio, VIEW_HEIGHT);
 }
 
-/* gamescen es el objeto contexto */
-void GameScene::setLevel(Level* level)
+void GameScene::setLevel(Level* level) 
 {
     this->level = level;
-}
-
-void GameScene::makeLevel() {
-    level->setPlayersPosition(this->players);
-    level->setObjects(this->platforms, this->spikes);
 }
 
 void GameScene::changeLevel() {
@@ -99,7 +92,13 @@ void GameScene::changeLevel() {
         if (!level) {
             level = new Level1;
             setLevel(level);
-            makeLevel();
+            level->setObjects(platforms, spikes);
+            level->setPlayersPosition(players);
+
+            /* set background */
+
+            level->setBackground(background);
+            background.setSize({ 800,600 });
         }
 
         break;
@@ -112,7 +111,8 @@ void GameScene::changeLevel() {
         if (!level) {
             level = new Level2;
             setLevel(level);
-            makeLevel();
+            level->setObjects(platforms, spikes);
+            level->setPlayersPosition(players);
         }
         break;
     case 2: break;
@@ -124,7 +124,8 @@ void GameScene::changeLevel() {
         if (!level) {
             level = new Level3;
             setLevel(level);
-            makeLevel();
+            level->setObjects(platforms, spikes);
+            level->setPlayersPosition(players);
         }
 
     }
@@ -134,21 +135,9 @@ void GameScene::changeLevel() {
 template<typename structure>
 void GameScene::CheckCollisions(std::vector<structure> collection) {
     sf::Vector2f direction;
-
+   
     for (structure& element : collection) {
         for (Player& player : players)
-            element.OnCollision(player, direction, 1.0f);
+            element.OnCollision(player,direction,1.0f);
     }
-}
-
-vector<Player> GameScene::getPlayers() {
-    return this->players;
-}
-
-int GameScene::getLevel() {
-    if (level->GetLabel() == "label 1") return 1;
-    else if (level->GetLabel() == "label 2") return 2;
-    else if (level->GetLabel() == "label 3") return 3;
-
-    return 0;
 }

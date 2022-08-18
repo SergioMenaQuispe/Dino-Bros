@@ -29,11 +29,11 @@ SceneManager* SceneManager::getInstance() {
 Scene* SceneManager::createGameScene(sf::RenderWindow* window, int cant_players) { 
 	GameScene * scene = new GameScene(window);
 	Player* player;
-	player = new Player("Images/DinitrioSprite.png", "arrows");
+	player = new Player("Images/DinitrioSprite.png", Vector2u(3, 2), "arrows", 0.3f, { 206.0f, 206.0f });
 	scene->addPlayers(*player);
 	
 	if (cant_players == 2) {
-		player = new Player("Images/DinoncioSprite.png","letters");
+		player = new Player("Images/DinoncioSprite.png", Vector2u(3, 2), "letters", 0.3f, { 206.0f, 206.0f });
 		scene->addPlayers(*player);
 	}
 

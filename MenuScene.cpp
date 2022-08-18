@@ -8,7 +8,7 @@ MenuScene::MenuScene(sf::RenderWindow* window) {
 
 
     /* set background */
-    txr_background.loadFromFile("Images/menu-background.jpg");
+    txr_background.loadFromFile("Images/other-menu.jpeg");
     background.setTexture(&txr_background);
     background.setSize({ 800,600 });
 

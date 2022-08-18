@@ -9,6 +9,7 @@ class Level1 : public Level
 public:
 	Level1() {
 		label = "level 1";
+		txr_background.loadFromFile("Images/fondo_dino_dia.png");
 	}
 
 	void setPlayersPosition(std::vector<Player>& players) {
@@ -76,6 +77,5 @@ public:
 		return spikes;
 	}
 };
-
 
 

@@ -27,19 +27,15 @@ public:
 	void draw();
 	void events();
 
-	void addPlayers(Player& p);
+	void addPlayers(Player &p);
 	void ResizeView();
 
 	void setLevel(Level* level);
-	void makeLevel();
 
 	void changeLevel();
 
 	template<typename structure>
 	void CheckCollisions(std::vector<structure> collection);
-
-	vector<Player> getPlayers();
-	int getLevel();
 
 };
 
