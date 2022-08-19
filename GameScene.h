@@ -6,6 +6,7 @@
 #include"Spike.h"
 #include"Door.h"
 #include"Level.h"
+#include"Heart.h"
 #include<vector>
 
 class GameScene : public Scene
@@ -16,6 +17,8 @@ private:
 	vector<Spike> spikes;
 	vector<Door> doors;
 
+	vector<Heart> hearts;
+
 	sf::View* view;
 	float deltaTime;
 	sf::Clock clock;
@@ -23,6 +26,7 @@ private:
 
 	Level* level;
 	int wins;
+	int difficult;
 
 public:
 	GameScene(sf::RenderWindow* window, int difficult);
@@ -39,7 +43,6 @@ public:
 	template<typename structure>
 	void CheckCollisions(std::vector<structure> collection);
 	
-	int difficult;
-
+	void Win();
 };
 

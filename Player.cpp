@@ -23,6 +23,7 @@ Player::Player(std::string nameTexture, std::string controls, int health)
 		animation = new Animation(texture, Vector2u(3, 2), 0.3f);
 
 		this->health = health;
+		this->winner = false;
 }
 
 Player::~Player()
@@ -129,4 +130,16 @@ void Player::die() {
 
 bool Player::alive() {
 	return (health >= 1);
+}
+
+int Player::getHealth() {
+	return this->health;
+}
+
+void Player::setWin(bool state) {
+	this->winner = state;
+}
+
+bool Player::isWinner() {
+	return winner;
 }

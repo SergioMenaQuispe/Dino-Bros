@@ -78,7 +78,9 @@ public:
 	std::vector<Door> GetDoors() {
 
 		// puerta
-		doors.push_back(Door("Images/puerta_dino.png", Vector2f(80.0f, 80.0f), Vector2f(2250.0f, 557.0f)));
+		//doors.push_back(Door("Images/puerta_dino.png", Vector2f(80.0f, 80.0f), Vector2f(2250.0f, 557.0f)));
+		doors.push_back(Door("Images/puerta_dino.png", Vector2f(80.0f, 80.0f), Vector2f(200.0f, 500.0f)));
+
 		return doors;
 	}
 };

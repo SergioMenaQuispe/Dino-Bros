@@ -26,6 +26,10 @@ public:
 
 	void die();
 	bool alive();
+	int getHealth();
+
+	void setWin(bool state);
+	bool isWinner();
 private:
 	Texture* texture;
 	RectangleShape body;
@@ -48,4 +52,6 @@ private:
 
 	// posicion incial del nivel en el que se encuentra
 	Vector2f initialPosition;
+
+	bool winner;
 };

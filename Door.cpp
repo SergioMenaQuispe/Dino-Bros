@@ -21,6 +21,6 @@ Door::~Door()
 void Door::OnCollision(Player& player, Vector2f direction, float push) {
 	if (GetCollider().CheckCollider(player.GetCollider(), direction, 1.0f))
 	{
-		SceneManager::push(SceneManager::createWinScene(SceneManager::top()->GetWindow()));
+		player.setWin(true);
 	}
 }

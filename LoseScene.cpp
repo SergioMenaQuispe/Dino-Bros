@@ -6,12 +6,21 @@ LoseScene::LoseScene(sf::RenderWindow * window) {
     SceneManager::clean();
     this->window = window;
     this->label = "Lose Scene";
+
+    /* set background */
+    txr_background.loadFromFile("Images/game-over.jpeg");
+    background.setTexture(&txr_background);
+    background.setSize({ 800,600 });
+
 }
 
 
 void LoseScene::draw() {
+    window->clear();
+    window->setView(sf::View(sf::Vector2f(400, 300), sf::Vector2f(800, 600)));
     events();
-    window->clear(sf::Color::Red);
+    window->draw(background);
+
 }
 
 void LoseScene::events() {

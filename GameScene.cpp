@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "SceneManager.h"
+#include"Heart.h"
 #include"Level1.h"
 #include"Level2.h"
 #include"Level3.h"
@@ -21,6 +22,7 @@ GameScene::GameScene(sf::RenderWindow* window, int difficult) {
 
     this->label = "Game Scene";
     
+    hearts.push_back(Heart({ 50.0f,500.0f }));
 }
 
 void GameScene::draw() {
@@ -39,6 +41,10 @@ void GameScene::draw() {
     for (Player& player : players) {
         player.Draw(*window);
         player.Update(deltaTime);
+        if (player.isWinner()) {
+            Win();
+            std::cout << "win" << wins << std::endl;
+        }
     }
 
     // plataformas
@@ -118,27 +124,26 @@ void GameScene::changeLevel() {
         // nivel 2
         if (level && level->GetLabel() == "level 1") {
             delete level;
-        }
 
-        if (!level) {
             level = new Level2;
             setLevel(level);
-            level->setObjects(platforms, spikes, doors);
             level->setPlayersPosition(players);
+            level->setObjects(platforms, spikes, doors);
+            level->setBackground(background);
         }
+
         break;
     case 2: break;
         // nivel 3
         if (level && level->GetLabel() == "level 2") {
             delete level;
-        }
-
-        if (!level) {
             level = new Level3;
             setLevel(level);
-            level->setObjects(platforms, spikes, doors);
             level->setPlayersPosition(players);
+            level->setObjects(platforms, spikes, doors);
+            level->setBackground(background);
         }
+
 
     }
 }
@@ -150,6 +155,21 @@ void GameScene::CheckCollisions(std::vector<structure> collection) {
    
     for (structure& element : collection) {
         for (Player& player : players)
-            element.OnCollision(player,direction,1.0f);
+            element.OnCollision(player,direction,100.0f);
+    }
+}
+
+
+void GameScene::Win() {
+    
+    if (wins < 3) {
+        for (Player& p : players) {
+            p.setWin(false);
+        }
+        wins++;
+    }
+    
+    else {
+        SceneManager::push(SceneManager::createWinScene(window));
     }
 }

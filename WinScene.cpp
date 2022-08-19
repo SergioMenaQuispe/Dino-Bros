@@ -6,12 +6,18 @@ WinScene::WinScene(sf::RenderWindow* window) {
     SceneManager::clean();
     this->window = window;
     label = "Win Scene";
+
+    /* set background */
+    txr_background.loadFromFile("Images/win.jpeg");
+    background.setTexture(&txr_background);
+    background.setSize({ 800,600 });
 }
 
 
 void WinScene::draw() {
+    window->clear();
     events();
-    window->clear(sf::Color::Blue);
+    window->draw(background);
 }
 
 void WinScene::events() {
