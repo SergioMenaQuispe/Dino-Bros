@@ -4,6 +4,7 @@
 #include"ModeScene.h"
 #include"LoseScene.h"
 #include"WinScene.h"
+#include"Health.h"
 
 SceneManager* SceneManager::instance = NULL;
 std::stack<Scene*> SceneManager::scenes = {};
@@ -31,17 +32,14 @@ SceneManager* SceneManager::getInstance() {
 Scene* SceneManager::createGameScene(sf::RenderWindow* window, int cant_players, int difficult) { 
 	GameScene * scene = new GameScene(window, difficult);
 	Player* player;
+	
+	Health h;
 
-	int health;
-	if (difficult == 2) health = difficult;
-	else if (difficult == 1) health = 3;
-	else if (difficult == 3) health = 1;
-
-	player = new Player("Images/DinitrioSprite.png","arrows",health);
+	player = new Player("Images/DinitrioSprite.png","arrows",h(difficult));
 	scene->addPlayers(*player);
 	
 	if (cant_players == 2) {
-		player = new Player("Images/DinoncioSprite.png","letters",health);
+		player = new Player("Images/DinoncioSprite.png","letters",h(difficult));
 		scene->addPlayers(*player);
 	}
 

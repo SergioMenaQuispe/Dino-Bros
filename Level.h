@@ -22,10 +22,13 @@ public:
 	void setBackground(sf::RectangleShape &background) {
 		background.setTexture(&txr_background);
 	}
+
 	virtual std::vector<Platform> GetPlatforms() = 0;
 	virtual std::vector<Spike> GetSpikes() = 0;
 	virtual std::vector<Door> GetDoors() = 0;
 	std::string GetLabel() { return this->label; }
+	
+
 protected:
 	std::vector<Platform> platforms;
 	std::vector<Spike> spikes;

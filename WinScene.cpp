@@ -16,6 +16,7 @@ WinScene::WinScene(sf::RenderWindow* window) {
 
 void WinScene::draw() {
     window->clear();
+    window->setView(sf::View(sf::Vector2f(400, 300), sf::Vector2f(800, 600)));
     events();
     window->draw(background);
 }
@@ -29,7 +30,13 @@ void WinScene::events() {
             window->close();
             break;
         case sf::Event::KeyPressed:
-            exit(1);
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+                SceneManager::push(SceneManager::createMenuScene(window));
+            }
+
+            else {
+                exit(1);
+            }
         }
 
     }

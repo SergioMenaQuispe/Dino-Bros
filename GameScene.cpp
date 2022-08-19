@@ -1,6 +1,5 @@
 #include "GameScene.h"
 #include "SceneManager.h"
-#include"Heart.h"
 #include"Level1.h"
 #include"Level2.h"
 #include"Level3.h"
@@ -17,18 +16,16 @@ GameScene::GameScene(sf::RenderWindow* window, int difficult) {
     view = new sf::View(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
     this->difficult = difficult;
-    background.setSize({ 3500,1500 });
-    background.setScale(2, 1);
+    background.setSize({ 800,600 });
 
     this->label = "Game Scene";
     
-    hearts.push_back(Heart({ 50.0f,500.0f }));
 }
 
 void GameScene::draw() {
 
     events();
-    
+
     /* Set window and view */
     window->clear();
     window->draw(background);
@@ -46,6 +43,8 @@ void GameScene::draw() {
             std::cout << "win" << wins << std::endl;
         }
     }
+
+    background.setPosition(players.at(0).GetPosition() - Vector2f(400,300));
 
     // plataformas
     for (Platform& platform : platforms) {
@@ -115,10 +114,9 @@ void GameScene::changeLevel() {
             level->setPlayersPosition(players);
 
             /* set background */
-
             level->setBackground(background);
         }
-
+        
         break;
     case 1:
         // nivel 2

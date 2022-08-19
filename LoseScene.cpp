@@ -35,6 +35,10 @@ void LoseScene::events() {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
                 SceneManager::push(SceneManager::createMenuScene(window));
             }
+
+            else {
+                exit(1);
+            }
         }
 
     }
