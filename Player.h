@@ -9,7 +9,7 @@ using namespace sf;
 class Player
 {
 public:
-	Player(std::string nameTexture, sf::Vector2u imageCount, string controls, float switchTime, Vector2f position);
+	Player(std::string nameTexture, string controls, int health);
 	~Player();
 
 	void Update(float deltaTime);
@@ -23,6 +23,8 @@ public:
 	}
 
 	void SetPosition(sf::Vector2f position);
+
+	void die();
 private:
 	Texture* texture;
 	RectangleShape body;
@@ -41,4 +43,9 @@ private:
 	bool canJump;
 	float jumpHeight;
 
+	int health;
+
+
+	// posicion incial del nivel en el que se encuentra
+	Vector2f initialPosition;
 };

@@ -23,7 +23,7 @@ private:
 	int wins;
 
 public:
-	GameScene(sf::RenderWindow* window);
+	GameScene(sf::RenderWindow* window, int difficult);
 	void draw();
 	void events();
 
@@ -36,6 +36,8 @@ public:
 
 	template<typename structure>
 	void CheckCollisions(std::vector<structure> collection);
+	
+	int difficult;
 
 };
 

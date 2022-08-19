@@ -21,6 +21,7 @@ Spike::~Spike()
 void Spike::OnCollision(Player& player, Vector2f direction, float push) {
 	if (GetCollider().CheckCollider(player.GetCollider(), direction, 1.0f))
 	{
-		SceneManager::push(SceneManager::createLoseScene(SceneManager::top()->GetWindow()));
+		player.die();
 	}
+
 }

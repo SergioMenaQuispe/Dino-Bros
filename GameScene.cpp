@@ -5,7 +5,7 @@
 #include"Level3.h"
 
 /* Sera el contexto de los niveles, (patron de diseño strategy)*/
-GameScene::GameScene(sf::RenderWindow* window) {
+GameScene::GameScene(sf::RenderWindow* window, int difficult) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
@@ -15,6 +15,7 @@ GameScene::GameScene(sf::RenderWindow* window) {
     VIEW_HEIGHT = 400.0f;
     view = new sf::View(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
+    this->difficult = difficult;
 }
 
 void GameScene::draw() {
@@ -47,6 +48,7 @@ void GameScene::draw() {
     
     CheckCollisions(platforms);
     CheckCollisions(spikes);
+
     changeLevel();
 }
     

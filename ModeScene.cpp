@@ -1,42 +1,41 @@
-#include "MenuScene.h"
+#include "ModeScene.h"
 #include "SceneManager.h"
 
-MenuScene::MenuScene(sf::RenderWindow* window) {
+ModeScene::ModeScene(sf::RenderWindow* window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
 
 
     /* set background */
-    txr_background.loadFromFile("Images/other-menu.jpeg");
+    txr_background.loadFromFile("Images/game-mode.jpeg");
     background.setTexture(&txr_background);
     background.setSize({ 800,600 });
 
     /* set pointer */
     txr_pointer.loadFromFile("./Images/pointer.png");
     pointer.setTexture(txr_pointer);
-    pointer_position = { 120,80 };
+    pointer_position = { 120,90 };
     pointer.setPosition(pointer_position);
 
     /*
     * Opc:
-    * 0 -> 1 player
-    * 1 -> 2 player
-    * 3 -> Game mode
-    * 4 -> exit
+    * 0 -> easy
+    * 1 -> mediunm
+    * 3 -> hard
     */
     opc = 0;
 }
 
 
-void MenuScene::draw() {
+void ModeScene::draw() {
     window->clear();
     events();
     window->draw(background);
     window->draw(pointer);
 }
 
-void MenuScene::events() {
+void ModeScene::events() {
     while (window->pollEvent(*event))
     {
         switch (event->type)
@@ -46,21 +45,21 @@ void MenuScene::events() {
             break;
         case sf::Event::KeyPressed:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-                pointer_position.y -= 65;
+                pointer_position.y -= 55;
                 opc--;
             }
             else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-                pointer_position.y += 65;
+                pointer_position.y += 55;
                 opc++;
             }
 
-            if (pointer_position.y < 80) {
-                pointer_position.y = 275;
-                opc = 3;
+            if (pointer_position.y < 90) {
+                pointer_position.y = 200;
+                opc = 2;
             }
 
-            if (pointer_position.y > 275) {
-                pointer_position.y = 80;
+            if (pointer_position.y > 200) {
+                pointer_position.y = 90;
                 opc = 0;
             }
 
@@ -70,21 +69,17 @@ void MenuScene::events() {
                 switch (opc)
                 {
                 case 0:
-                    SceneManager::push(SceneManager::createGameScene(window, 1, SceneManager::getDifficult()));
+                    SceneManager::setDifficult(1);
                     break;
-
                 case 1:
-                    SceneManager::push(SceneManager::createGameScene(window, 2, SceneManager::getDifficult()));
+                    SceneManager::setDifficult(2);
                     break;
-
                 case 2:
-                    SceneManager::push(SceneManager::createModeScene(window));
-                    break;
-
-                case 3: 
-                    exit(1);
+                    SceneManager::setDifficult(3);
                     break;
                 }
+
+                SceneManager::pop();
             }
         }
     }
