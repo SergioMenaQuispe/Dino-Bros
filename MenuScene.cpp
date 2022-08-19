@@ -26,6 +26,7 @@ MenuScene::MenuScene(sf::RenderWindow* window) {
     * 4 -> exit
     */
     opc = 0;
+    label = "Menu Scene";
 }
 
 

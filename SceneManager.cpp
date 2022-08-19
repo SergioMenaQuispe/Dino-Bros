@@ -68,6 +68,13 @@ void SceneManager::pop() {
 	trash.push(deleted);
 }
 
+void SceneManager::goToMenu() {
+	while (scenes.size() > 0)
+	{
+		pop();
+	}
+}
+
 void SceneManager::clean() {
 	while (!trash.empty()) {
 		Scene* deleted = trash.top();

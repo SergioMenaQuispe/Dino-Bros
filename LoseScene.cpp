@@ -5,6 +5,7 @@ LoseScene::LoseScene(sf::RenderWindow * window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
+    this->label = "Lose Scene";
 }
 
 
@@ -23,7 +24,7 @@ void LoseScene::events() {
             break;
         case sf::Event::KeyPressed:
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
-                SceneManager::pop();
+                SceneManager::push(SceneManager::createMenuScene(window));
             }
         }
 

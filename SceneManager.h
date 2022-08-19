@@ -28,8 +28,10 @@ public:
 	static void push(Scene* newScene);
 	static Scene* top();
 	static void pop();
+	static void goToMenu();
 
 	static void setDifficult(int difficult);
 	static int getDifficult();
+
 };
 

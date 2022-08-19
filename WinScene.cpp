@@ -5,10 +5,12 @@ WinScene::WinScene(sf::RenderWindow* window) {
     event = new sf::Event;
     SceneManager::clean();
     this->window = window;
+    label = "Win Scene";
 }
 
 
 void WinScene::draw() {
+    events();
     window->clear(sf::Color::Blue);
 }
 
@@ -21,9 +23,7 @@ void WinScene::events() {
             window->close();
             break;
         case sf::Event::KeyPressed:
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::X)) {
-                SceneManager::pop();
-            }
+            exit(1);
         }
 
     }

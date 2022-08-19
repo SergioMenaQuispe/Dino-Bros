@@ -26,4 +26,8 @@ public:
 		spikes.push_back(Spike("pua_02", Vector2f(50.0f, 50.0f), Vector2f(120.0f, 490.0f)));
 		return spikes;
 	}
+
+	std::vector<Door> GetDoors() {
+		return doors;
+	}
 };

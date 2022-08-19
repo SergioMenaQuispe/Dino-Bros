@@ -25,6 +25,7 @@ ModeScene::ModeScene(sf::RenderWindow* window) {
     * 3 -> hard
     */
     opc = 0;
+    label = "Mode Scene";
 }
 
 

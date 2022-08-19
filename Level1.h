@@ -44,8 +44,6 @@ public:
 		//salto final
 		platforms.push_back(Platform("Images/bloque_01_dino.png", Vector2f(300.0f, 200.0f), Vector2f(2250.0f, 680.0f)));
 
-		// puerta
-		platforms.push_back(Platform("Images/puerta_dino.png", Vector2f(80.0f, 80.0f), Vector2f(2250.0f, 557.0f)));
 
 		return platforms;
 	}
@@ -75,6 +73,13 @@ public:
 			spikes.push_back(Spike("Images/pua_02.png", Vector2f(50.0f, 50.0f), Vector2f(i, 1000.0f)));
 		}
 		return spikes;
+	}
+
+	std::vector<Door> GetDoors() {
+
+		// puerta
+		doors.push_back(Door("Images/puerta_dino.png", Vector2f(80.0f, 80.0f), Vector2f(2250.0f, 557.0f)));
+		return doors;
 	}
 };
 

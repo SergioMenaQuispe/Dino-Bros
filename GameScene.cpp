@@ -16,6 +16,11 @@ GameScene::GameScene(sf::RenderWindow* window, int difficult) {
     view = new sf::View(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(VIEW_HEIGHT, VIEW_HEIGHT));
 
     this->difficult = difficult;
+    background.setSize({ 3500,1500 });
+    background.setScale(2, 1);
+
+    this->label = "Game Scene";
+    
 }
 
 void GameScene::draw() {
@@ -45,7 +50,13 @@ void GameScene::draw() {
     for (Spike& spike : spikes) {
         spike.Draw(*window);
     }
+
+    // doors
+    for (Door& door : doors) {
+        door.Draw(*window);
+    }
     
+    CheckCollisions(doors);
     CheckCollisions(platforms);
     CheckCollisions(spikes);
 
@@ -94,13 +105,12 @@ void GameScene::changeLevel() {
         if (!level) {
             level = new Level1;
             setLevel(level);
-            level->setObjects(platforms, spikes);
+            level->setObjects(platforms, spikes, doors);
             level->setPlayersPosition(players);
 
             /* set background */
 
             level->setBackground(background);
-            background.setSize({ 800,600 });
         }
 
         break;
@@ -113,7 +123,7 @@ void GameScene::changeLevel() {
         if (!level) {
             level = new Level2;
             setLevel(level);
-            level->setObjects(platforms, spikes);
+            level->setObjects(platforms, spikes, doors);
             level->setPlayersPosition(players);
         }
         break;
@@ -126,7 +136,7 @@ void GameScene::changeLevel() {
         if (!level) {
             level = new Level3;
             setLevel(level);
-            level->setObjects(platforms, spikes);
+            level->setObjects(platforms, spikes, doors);
             level->setPlayersPosition(players);
         }
 

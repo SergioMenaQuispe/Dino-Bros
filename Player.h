@@ -25,6 +25,7 @@ public:
 	void SetPosition(sf::Vector2f position);
 
 	void die();
+	bool alive();
 private:
 	Texture* texture;
 	RectangleShape body;
@@ -44,7 +45,6 @@ private:
 	float jumpHeight;
 
 	int health;
-
 
 	// posicion incial del nivel en el que se encuentra
 	Vector2f initialPosition;

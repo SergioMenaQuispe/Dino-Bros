@@ -126,3 +126,7 @@ void Player::die() {
 	health--;
 	body.setPosition(initialPosition);
 }
+
+bool Player::alive() {
+	return (health >= 1);
+}

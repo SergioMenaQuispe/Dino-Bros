@@ -4,6 +4,7 @@
 #include"Player.h"
 #include"Platform.h"
 #include"Spike.h"
+#include"Door.h"
 #include"Level.h"
 #include<vector>
 
@@ -13,6 +14,7 @@ private:
 	vector<Player> players;
 	vector<Platform> platforms;
 	vector<Spike> spikes;
+	vector<Door> doors;
 
 	sf::View* view;
 	float deltaTime;
